@@ -1,0 +1,60 @@
+import React from 'react';
+import Calculator from './Calculator'; // Import the Calculator component
+
+function App() {
+  return (
+    <div className="App">
+      <Calculator />
+    </div>
+  );
+}
+
+export default App;
+
+
+import React, { Component } from 'react';
+
+class Calculator extends Component {
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+      result: '',
+    };
+  }
+
+  // Function to handle user input
+  handleInput = (event) => {
+    this.setState({ input: event.target.value });
+  };
+
+  // Function to perform calculations
+  calculateResult = () => {
+    try {
+      const result = eval(this.state.input); // Use eval to evaluate the expression
+      this.setState({ result });
+    } catch (error) {
+      this.setState({ result: 'Error' });
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <h2>Arithmetic Calculator</h2>
+        <input
+          type="text"
+          value={this.state.input}
+          onChange={this.handleInput}
+          placeholder="Enter an expression"
+        />
+        <button onClick={this.calculateResult}>Calculate</button>
+        <div>
+          <strong>Result:</strong> {this.state.result}
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Calculator;
